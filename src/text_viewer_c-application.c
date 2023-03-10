@@ -23,87 +23,64 @@
 #include "text_viewer_c-application.h"
 #include "text_viewer_c-window.h"
 
-struct _TextViewerCApplication
-{
+struct _TextViewerCApplication {
     AdwApplication parent_instance;
 };
 
-G_DEFINE_TYPE(TextViewerCApplication,
-              text_viewer_c_application,
+G_DEFINE_TYPE(TextViewerCApplication, text_viewer_c_application,
               ADW_TYPE_APPLICATION)
 
-TextViewerCApplication*
-text_viewer_c_application_new(const char* application_id,
-                              GApplicationFlags flags)
-{
+TextViewerCApplication *
+text_viewer_c_application_new(const char *application_id,
+                              GApplicationFlags flags) {
     g_return_val_if_fail(application_id != NULL, NULL);
 
-    return g_object_new(TEXT_VIEWER_C_TYPE_APPLICATION,
-                        "application-id",
-                        application_id,
-                        "flags",
-                        flags,
-                        NULL);
+    return g_object_new(TEXT_VIEWER_C_TYPE_APPLICATION, "application-id",
+                        application_id, "flags", flags, NULL);
 }
 
-static void
-text_viewer_c_application_activate(GApplication* app)
-{
-    GtkWindow* window;
+static void text_viewer_c_application_activate(GApplication *app) {
+    GtkWindow *window;
 
     g_assert(TEXT_VIEWER_C_IS_APPLICATION(app));
 
     window = gtk_application_get_active_window(GTK_APPLICATION(app));
     if (window == NULL)
         window =
-          g_object_new(TEXT_VIEWER_C_TYPE_WINDOW, "application", app, NULL);
+            g_object_new(TEXT_VIEWER_C_TYPE_WINDOW, "application", app, NULL);
 
     gtk_window_present(window);
 }
 
 static void
-text_viewer_c_application_class_init(TextViewerCApplicationClass* klass)
-{
-    GApplicationClass* app_class = G_APPLICATION_CLASS(klass);
+text_viewer_c_application_class_init(TextViewerCApplicationClass *klass) {
+    GApplicationClass *app_class = G_APPLICATION_CLASS(klass);
 
     app_class->activate = text_viewer_c_application_activate;
 }
 
-static void
-text_viewer_c_application_about_action(GSimpleAction* action,
-                                       GVariant* parameter,
-                                       gpointer user_data)
-{
-    static const char* developers[] = { "Vardhan Patil", NULL };
-    TextViewerCApplication* self = user_data;
-    GtkWindow* window = NULL;
+static void text_viewer_c_application_about_action(GSimpleAction *action,
+                                                   GVariant *parameter,
+                                                   gpointer user_data) {
+    static const char *developers[] = {"Vardhan Patil", NULL};
+    TextViewerCApplication *self = user_data;
+    GtkWindow *window = NULL;
 
     g_assert(TEXT_VIEWER_C_IS_APPLICATION(self));
 
     window = gtk_application_get_active_window(GTK_APPLICATION(self));
 
-    adw_show_about_window(window,
-                          "application-name",
-                          "text_viewer_c",
-                          "application-icon",
-                          "com.example.TextViewerC",
-                          "developer-name",
-                          "Vardhan Patil",
-                          "version",
-                          "0.1.0",
-                          "developers",
-                          developers,
-                          "copyright",
-                          "© 2023 Vardhan Patil",
-                          NULL);
+    adw_show_about_window(window, "application-name", "text_viewer_c",
+                          "application-icon", "com.example.TextViewerC",
+                          "developer-name", "Vardhan Patil", "version", "0.1.0",
+                          "developers", developers, "copyright",
+                          "© 2023 Vardhan Patil", NULL);
 }
 
-static void
-text_viewer_c_application_quit_action(GSimpleAction* action,
-                                      GVariant* parameter,
-                                      gpointer user_data)
-{
-    TextViewerCApplication* self = user_data;
+static void text_viewer_c_application_quit_action(GSimpleAction *action,
+                                                  GVariant *parameter,
+                                                  gpointer user_data) {
+    TextViewerCApplication *self = user_data;
 
     g_assert(TEXT_VIEWER_C_IS_APPLICATION(self));
 
@@ -111,15 +88,17 @@ text_viewer_c_application_quit_action(GSimpleAction* action,
 }
 
 static const GActionEntry app_actions[] = {
-    { "quit", text_viewer_c_application_quit_action },
-    { "about", text_viewer_c_application_about_action },
+    {"quit", text_viewer_c_application_quit_action},
+    {"about", text_viewer_c_application_about_action},
 };
 
-static void
-text_viewer_c_application_init(TextViewerCApplication* self)
-{
-    g_action_map_add_action_entries(
-      G_ACTION_MAP(self), app_actions, G_N_ELEMENTS(app_actions), self);
-    gtk_application_set_accels_for_action(
-      GTK_APPLICATION(self), "app.quit", (const char*[]){ "<primary>q", NULL });
+static void text_viewer_c_application_init(TextViewerCApplication *self) {
+    g_action_map_add_action_entries(G_ACTION_MAP(self), app_actions,
+                                    G_N_ELEMENTS(app_actions), self);
+
+    gtk_application_set_accels_for_action(GTK_APPLICATION(self), "app.quit",
+                                          (const char *[]){"<primary>q", NULL});
+                                          
+    gtk_application_set_accels_for_action(GTK_APPLICATION(self), "win.open",
+                                          (const char *[]){"<primary>o", NULL});
 }
