@@ -1,0 +1,6 @@
+data/com.example.TextViewerC.desktop.in
+data/com.example.TextViewerC.appdata.xml.in
+data/com.example.TextViewerC.gschema.xml
+src/main.c
+src/text_viewer_c-window.c
+src/text_viewer_c-window.ui
