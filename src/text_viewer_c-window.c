@@ -28,7 +28,7 @@ struct _TextViewerCWindow
 
   /* Template widgets */
   GtkHeaderBar        *header_bar;
-  GtkLabel            *label;
+  GtkTextView         *main_text_view;
 };
 
 G_DEFINE_FINAL_TYPE (TextViewerCWindow, text_viewer_c_window, ADW_TYPE_APPLICATION_WINDOW)
@@ -40,7 +40,6 @@ text_viewer_c_window_class_init (TextViewerCWindowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/example/TextViewerC/text_viewer_c-window.ui");
   gtk_widget_class_bind_template_child (widget_class, TextViewerCWindow, header_bar);
-  gtk_widget_class_bind_template_child (widget_class, TextViewerCWindow, label);
 }
 
 static void

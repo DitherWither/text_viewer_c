@@ -26,6 +26,10 @@ G_BEGIN_DECLS
 
 #define TEXT_VIEWER_C_TYPE_WINDOW (text_viewer_c_window_get_type())
 
-G_DECLARE_FINAL_TYPE (TextViewerCWindow, text_viewer_c_window, TEXT_VIEWER_C, WINDOW, AdwApplicationWindow)
+G_DECLARE_FINAL_TYPE(TextViewerCWindow,
+                     text_viewer_c_window,
+                     TEXT_VIEWER_C,
+                     WINDOW,
+                     AdwApplicationWindow)
 
 G_END_DECLS
