@@ -24,9 +24,7 @@
 
 #include "text_viewer_c-application.h"
 
-int
-main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     g_autoptr(TextViewerCApplication) app = NULL;
     int ret;
 

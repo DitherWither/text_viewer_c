@@ -26,14 +26,11 @@ G_BEGIN_DECLS
 
 #define TEXT_VIEWER_C_TYPE_APPLICATION (text_viewer_c_application_get_type())
 
-G_DECLARE_FINAL_TYPE(TextViewerCApplication,
-                     text_viewer_c_application,
-                     TEXT_VIEWER_C,
-                     APPLICATION,
-                     AdwApplication)
+G_DECLARE_FINAL_TYPE(TextViewerCApplication, text_viewer_c_application,
+                     TEXT_VIEWER_C, APPLICATION, AdwApplication)
 
-TextViewerCApplication*
-text_viewer_c_application_new(const char* application_id,
+TextViewerCApplication *
+text_viewer_c_application_new(const char *application_id,
                               GApplicationFlags flags);
 
 G_END_DECLS
